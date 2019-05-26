@@ -1,8 +1,17 @@
 .App {
   text-align: center;
 }
+
+*{
+  font-family: 'Dancing Script', cursive;
+}
+
 body{
   background: url("background.jpg");
   background-size: 100% 100%;
   background-attachment: fixed;
+}
+
+footer{
+  margin-top: 50px;
 }

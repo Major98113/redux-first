@@ -9,10 +9,30 @@ class User extends Component{
     constructor(props){
         super(props);
         this.state = {
-            isGuest : this.props.profile.isGuest,
-            name : this.props.profile.name,
-            email: this.props.profile.email
+            isGuest : true,
+            name : "",
+            email: ""
         };
+
+        axios.post('/user',{})
+            .then( (response) =>{
+                if ( response.data !== "failure" ){
+                    this.props.profile.isGuest = false;
+                    this.props.profile.name = response.data.name;
+                    this.props.profile.email = response.data.email;
+                    this.setState({
+                        isGuest : this.props.profile.isGuest,
+                        name : this.props.profile.name,
+                        email: this.props.profile.email
+                    });
+
+                }
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
+        console.log(this.props.profile);
+
         this.setUser = this.setUser.bind(this);
     }
 
@@ -34,7 +54,6 @@ class User extends Component{
 
                 }
                 else {
-                    console.log(response);
                     alert("Не найдено пользователя");
                 }
             })
@@ -53,7 +72,6 @@ class User extends Component{
 
 
     render() {
-        console.log(this.props.profile);
         return(
           <div>
               {this.state.isGuest ?  <Autorization signIn={this.signIn.bind(this)} />: <Profile name={this.state.name} email={this.state.email  }/>}

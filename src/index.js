@@ -17,8 +17,8 @@ import {Provider} from 'react-redux';
 const store = createStore(allReducers,{
     "user" :{
         isGuest : true,
-        username : "",
-        password : ""
+        name : "",
+        email : ""
     }
 });
 
