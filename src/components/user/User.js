@@ -10,7 +10,7 @@ class User extends Component{
         super(props);
         this.state = {
             isGuest : true,
-            name : "",
+            username : "",
             email: ""
         };
 
@@ -18,11 +18,11 @@ class User extends Component{
             .then( (response) =>{
                 if ( response.data !== "failure" ){
                     this.props.profile.isGuest = false;
-                    this.props.profile.name = response.data.name;
+                    this.props.profile.username = response.data.username;
                     this.props.profile.email = response.data.email;
                     this.setState({
                         isGuest : this.props.profile.isGuest,
-                        name : this.props.profile.name,
+                        username : this.props.profile.username,
                         email: this.props.profile.email
                     });
 
@@ -31,9 +31,9 @@ class User extends Component{
             .catch(function (error) {
                 console.log(error);
             });
-        console.log(this.props.profile);
 
         this.setUser = this.setUser.bind(this);
+        this.signOut = this.signOut.bind(this);
     }
 
     signIn(email, password){
@@ -46,7 +46,7 @@ class User extends Component{
                 if(response.data.result =='success'){
                     const data ={
                         isGuest : false,
-                        name : response.data.name,
+                        username : response.data.username,
                         email : response.data.email
                     };
 
@@ -62,6 +62,18 @@ class User extends Component{
             });
     }
 
+    signOut(){
+        axios.post("/signout",{})
+            .then(
+                (response) =>{
+                    this.setState({
+                        isGuest : true
+                    });
+                }
+            )
+            .catch((error) => console.log(error))
+    }
+
     setUser(data){
         this.props.dispatch({
             type: "AUTHORIZATION",
@@ -74,7 +86,7 @@ class User extends Component{
     render() {
         return(
           <div>
-              {this.state.isGuest ?  <Autorization signIn={this.signIn.bind(this)} />: <Profile name={this.state.name} email={this.state.email  }/>}
+              {this.state.isGuest ?  <Autorization signIn={this.signIn.bind(this)} />: <Profile name={this.state.name} email={this.state.email} signOut={this.signOut}/>}
           </div>
         );
     }

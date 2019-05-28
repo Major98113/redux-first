@@ -1,12 +1,11 @@
 import React, {Component} from 'react';
-import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 
 class SignUp extends Component{
 
     constructor(props){
         super(props);
         this.state = {
-            name : "",
+            username : "",
             email : "",
             password : ""
         };
@@ -18,7 +17,7 @@ class SignUp extends Component{
     }
 
     handleNameChange(e){
-        this.setState({ name : e.target.value});
+        this.setState({ username : e.target.value});
     }
 
     handleEmailChange(e){
@@ -29,7 +28,7 @@ class SignUp extends Component{
         this.setState({ password : e.target.value});
     }
     signUp(){
-        alert(this.state.name + " " + this.state.email + " " + this.state.password);
+        alert(this.state.username + " " + this.state.email + " " + this.state.password);
     }
 
 

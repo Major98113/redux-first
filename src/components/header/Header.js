@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { connect } from 'react-redux';
 import './styles/header.css';
 

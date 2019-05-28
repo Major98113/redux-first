@@ -1,13 +1,66 @@
 import React, {Component} from 'react';
 import './styles/profile.css';
 import {connect} from "react-redux";
+import axios from 'axios';
+import Rating from "./Rating";
 
 class Profile extends Component{
     constructor(props){
         super(props);
-        const name = this.props.name;
-        const email = this.props.email;
+        this.state ={
+            username : this.props.profile.username,
+            email : this.props.profile.email,
+            skills : [],
+            feedbacks : ["Пока у вас нет отзывов"],
+            rating : 0
+        };
+        this.setUserInfo = this.setUserInfo.bind(this);
+        this.signOut = this.props.signOut.bind(this);
+
     }
+
+    componentWillMount(){
+        axios.post('/profile',{
+            username : this.props.profile.username,
+            email : this.props.profile.email
+        })
+            .then( (response) =>{
+                if(response.data.result =='success'){
+                    let data = {
+                        about : response.data.about,
+                        hobbies : response.data.hobbies,
+                        skills : response.data.skills,
+                        rating : response.data.rating,
+                        img : response.data.img,
+                        followers : response.data.followers,
+                        following : response.data.following,
+                        snippets : response.data.snippets,
+                        feedbacks : response.data.feedbacks
+                    };
+                    this.setUserInfo(data);
+                }
+
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
+    }
+
+    setUserInfo(data){
+        this.setState({
+            about : data.about,
+            hobbies : data.hobbies,
+            skills : data.skills,
+            img : data.img,
+            followers : data.followers,
+            following : data.following,
+            snippets : data.snippets,
+            feedbacks : data.feedbacks
+        });
+    }
+
+
+
 
 
     render() {
@@ -18,22 +71,18 @@ class Profile extends Component{
                         <div className="well profile">
                             <div className="col-sm-12">
                                 <div className="col-xs-12 col-sm-8">
-                                    <h2>Max</h2>
-                                    <p><strong>Email: </strong> max@max.ru </p>
-                                    <p><strong>About: </strong> Web Designer / UI. </p>
-                                    <p><strong>Hobbies: </strong> Read, out with friends, listen to music, draw and
-                                        learn new things. </p>
-                                    <p><strong>Skills: </strong>
-                                        <span className="tags">html5</span>
-                                        <span className="tags">css3</span>
-                                        <span className="tags">jquery</span>
-                                        <span className="tags">bootstrap3</span>
-                                    </p>
+                                    <h2>{this.state.username}</h2>
+                                    <p><strong>Email: </strong> {this.state.email} </p>
+                                    <p><strong>About: </strong> {this.state.about} </p>
+                                    <p><strong>Hobbies: </strong> {this.state.hobbies} </p>
+                                    <p><strong>Skills: </strong> {this.state.skills.map( (item) => <span className="tags">{item}</span> )}</p>
+                                    <p><strong>Feedbacks: </strong><ul>{this.state.feedbacks.map( (item, i) => <li>{item}</li>)}</ul></p>
+                                    <button onClick={this.signOut} className="btn btn-info">Выйти</button>
                                 </div>
                                 <div className="col-xs-12 col-sm-4 text-center">
                                     <figure>
                                         <img
-                                            src="https://www.anonymousvpn.org/images/mascot-shadow.png"
+                                            src={this.state.img}
                                             alt="" className="img-circle img-responsive" />
                                             <figcaption className="ratings">
                                                 <p>Ratings
@@ -54,26 +103,27 @@ class Profile extends Component{
                                                     </a>
                                                 </p>
                                             </figcaption>
+                                        <Rating/>
                                     </figure>
                                 </div>
                             </div>
                             <div className="col-xs-12 divider text-center">
                                 <div className="col-xs-12 col-sm-4 emphasis">
-                                    <h2><strong> 20,7K </strong></h2>
+                                    <h2><strong>{this.state.followers}</strong></h2>
                                     <p>
                                         <small>Followers</small>
                                     </p>
 
                                 </div>
                                 <div className="col-xs-12 col-sm-4 emphasis">
-                                    <h2><strong>245</strong></h2>
+                                    <h2><strong>{this.state.following}</strong></h2>
                                     <p>
                                         <small>Following</small>
                                     </p>
 
                                 </div>
                                 <div className="col-xs-12 col-sm-4 emphasis">
-                                    <h2><strong>43</strong></h2>
+                                    <h2><strong>{this.state.snippets}</strong></h2>
                                     <p>
                                         <small>Snippets</small>
                                     </p>

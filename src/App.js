@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import { BrowserRouter as Router, Route, Link, Switch } from "react-router-dom";
+import { Route, Switch } from "react-router-dom";
 import { connect } from 'react-redux';
 import axios from "axios";
 import Header from './components/header/Header';
@@ -18,10 +18,9 @@ class App extends Component{
             .then( (response) =>{
                 if ( response.data !== "failure" ){
                     this.props.profile.isGuest = false;
-                    this.props.profile.name = response.data.name;
+                    this.props.profile.username = response.data.username;
                     this.props.profile.email = response.data.email;
                 }
-                console.log(this.props.profile);
             })
             .catch(function (error) {
                 console.log(error);

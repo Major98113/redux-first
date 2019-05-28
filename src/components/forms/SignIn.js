@@ -21,12 +21,6 @@ class SignIn extends Component{
         this.setState({password: e.target.value});
     }
 
-    // signIn(e){
-    //     e.preventDefault();
-    //     alert(this.state.email + " " + this.state.password)
-    // };
-
-
     render() {
         return(
             <div role="tabpanel" className="tab-pane fade in active" id="Section1">

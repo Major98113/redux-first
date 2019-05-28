@@ -8,7 +8,7 @@ class Callback extends Component{
     constructor(props){
         super(props);
         this.state = {
-            name : "",
+            username : "",
             email : "",
             text : "",
             isFormFilled : false
@@ -22,7 +22,7 @@ class Callback extends Component{
 
     handleName(e){
         this.setState({
-            name : e.target.value
+            username : e.target.value
         })
     }
 
@@ -41,7 +41,7 @@ class Callback extends Component{
     onSubmit(e){
         e.preventDefault();
         axios.post("/callback",{
-            name : this.state.name,
+            username : this.state.username,
             email : this.state.email,
             text : this.state.text
         })
