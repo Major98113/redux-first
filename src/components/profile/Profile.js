@@ -47,6 +47,11 @@ class Profile extends Component{
     }
 
     setUserInfo(data){
+
+        let feedbacks = data.feedbacks.map( ( feedback ) => {
+            return "В ближайшее время оператор обязательно свяжется с вами по указанному вами телефону ("+ feedback +")";
+        });
+
         this.setState({
             about : data.about,
             hobbies : data.hobbies,
@@ -55,7 +60,7 @@ class Profile extends Component{
             followers : data.followers,
             following : data.following,
             snippets : data.snippets,
-            feedbacks : data.feedbacks
+            feedbacks : feedbacks
         });
     }
 
@@ -76,7 +81,7 @@ class Profile extends Component{
                                     <p><strong>About: </strong> {this.state.about} </p>
                                     <p><strong>Hobbies: </strong> {this.state.hobbies} </p>
                                     <p><strong>Skills: </strong> {this.state.skills.map( (item) => <span className="tags">{item}</span> )}</p>
-                                    <p><strong>Feedbacks: </strong><ol>{this.state.feedbacks.map( (item, i) => <li>{item}</li>)}</ol></p>
+                                    <p><strong>Записи: </strong><ol>{this.state.feedbacks.map( (item, i) => <li>{item}</li>)}</ol></p>
                                     <button onClick={this.signOut} className="btn btn-info">Выйти</button>
                                 </div>
                                 <div className="col-xs-12 col-sm-4 text-center">

@@ -81,10 +81,16 @@ class SignUp extends Component{
     render() {
         return(
             <div role="tabpanel" className="tab-pane fade in active" id="Section2">
-                <div className="form-horizontal">
+                <form
+                    className="form-horizontal"
+                    onSubmit={(e) => {
+                        e.preventDefault();
+                        this.signUp(this.state)}
+                    } >
                     <div className="form-group">
                         <label>NickName</label>
                         <input type="text"
+                               required
                                className="form-control"
                                onChange={this.handleNameChange}
                         />
@@ -92,6 +98,7 @@ class SignUp extends Component{
                     <div className="form-group">
                         <label>Email address</label>
                         <input type="email"
+                               required
                                className="form-control"
                                onChange={this.handleEmailChange}
                         />
@@ -99,6 +106,7 @@ class SignUp extends Component{
                     <div className="form-group">
                         <label>Password</label>
                         <input type="password"
+                               required
                                className="form-control"
                                onChange={this.handlePasswordChange}
                         />
@@ -107,6 +115,7 @@ class SignUp extends Component{
                     <div className="form-group">
                         <label>About you</label>
                         <textarea
+                            required
                             className="form-control"
                             onChange={this.handleAboutChange}>
                         </textarea>
@@ -115,6 +124,7 @@ class SignUp extends Component{
                     <div className="form-group">
                         <label>Your Hobbies</label>
                         <textarea
+                            required
                             className="form-control"
                             onChange={this.handleHobbiesChange}>
                         </textarea>
@@ -138,9 +148,9 @@ class SignUp extends Component{
 
 
                     <div className="form-group">
-                        <button className="btn btn-default" onClick={() => {this.signUp(this.state)}}>Sign up</button>
+                        <button className="btn btn-default" type="submit">Sign up</button>
                     </div>
-                </div>
+                </form>
             </div>
 
         )

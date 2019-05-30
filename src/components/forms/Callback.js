@@ -117,13 +117,17 @@ class Form extends Component {
                         </div>
                     </div>
                     <div className="form-group">
-                        <label htmlFor="message" className="h4 ">Адрес</label>
-                        <textarea
+                        <label htmlFor="message" className="h4 ">Телефон</label>
+                        <input
                             onChange={this.handleText}
                             id="message"
                             className="form-control" rows="5"
-                            placeholder="Enter your message"
-                            required></textarea>
+                            placeholder="+7-(921)-23-456-78"
+                            required
+                            type="tel"
+                            name="phone"
+                            pattern="+7-[0-9]{3}-[0-9]{2}-[0-9]{3}-[0-9]{2}"/>
+
                         <div className="help-block with-errors"></div>
                     </div>
                     <button type="submit" id="form-submit" className="btn btn-success btn-lg pull-right">Submit</button>

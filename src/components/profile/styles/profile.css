@@ -83,4 +83,11 @@ span.tags
 
 ol li{
     text-align: left;
+    margin-bottom: 20px;
+}
+
+.profile ol {
+    padding-left: 15px;
+    margin-top: 13px;
+    margin-bottom: 40px;
 }

@@ -16,7 +16,6 @@ class User extends Component{
 
         axios.post('/user',{})
             .then( (response) =>{
-                console.log(response.data);
                 if ( response.data !== "failure" ){
                     this.props.profile.isGuest = false;
                     this.props.profile.username = response.data.username;
