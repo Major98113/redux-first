@@ -16,6 +16,7 @@ class User extends Component{
 
         axios.post('/user',{})
             .then( (response) =>{
+                console.log(response.data);
                 if ( response.data !== "failure" ){
                     this.props.profile.isGuest = false;
                     this.props.profile.username = response.data.username;
@@ -34,6 +35,7 @@ class User extends Component{
 
         this.setUser = this.setUser.bind(this);
         this.signOut = this.signOut.bind(this);
+
     }
 
     signIn(email, password){
@@ -108,6 +110,7 @@ class User extends Component{
 
 
     render() {
+        console.log(this.state);
         return(
           <div>
               {this.state.isGuest ?  <Autorization signIn={this.signIn.bind(this)}  signUp={this.signUp.bind(this)} />: <Profile name={this.state.name} email={this.state.email} signOut={this.signOut}/>}
