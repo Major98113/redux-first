@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import axios from "axios";
 import { css } from '@emotion/core';
 import { BeatLoader } from 'react-spinners';
+import UsersList from "./UsersList";
 
 const override = css`
     display: block;
@@ -25,7 +26,7 @@ class Users extends Component{
     componentWillMount() {
         const users = this.state.users;
         setTimeout( () => {
-            for ( let i = 0 ; i < 10; i++){
+            for ( let i = 0 ; i < 4; i++){
                 axios.get("https://api.randomuser.me/", {})
                     .then( (response) => {
                             users.push(response.data.results[0]);
@@ -50,45 +51,20 @@ class Users extends Component{
 
     render() {
         return(
-            <div className="col-sm-6 col-sm-offset-3">
-                <h2 className="text-center">Наши пользователи</h2>
-                {this.state.loading ? <BeatLoader
-                    css={override}
-                    sizeUnit={"px"}
-                    size={20}
-                    color={'#fe4ad8'}
-                    loading={this.state.loading}
-                /> : <UsersList users={this.state.users}/>}
-            </div>
-        )
-    }
-}
-
-
-class UsersList extends Component {
-    constructor(props){
-        super(props);
-        this.state = {
-            users : props.users
-        }
-    }
-
-    render() {
-        return (
-            <div>
+            <div className="row">
+                <h2 className="text-center">Наши довольные клиенты</h2>
                 {
-                    this.state.users.map( (user) => {
-                        return(
-                            <div>
-                                <div>{user.email}</div>
-                                <div>{user.name.first}</div>
-                            </div>
-                        )
-                    })
+                    this.state.loading ?
+                        <BeatLoader css={override} sizeUnit={"px"} size={20} color={'#fe4ad8'} loading={this.state.loading}/>
+                        :
+                        <UsersList users={this.state.users}/>
                 }
             </div>
         )
     }
 }
+
+
+
 
 export default Users;

@@ -76,7 +76,7 @@ class Profile extends Component{
                                     <p><strong>About: </strong> {this.state.about} </p>
                                     <p><strong>Hobbies: </strong> {this.state.hobbies} </p>
                                     <p><strong>Skills: </strong> {this.state.skills.map( (item) => <span className="tags">{item}</span> )}</p>
-                                    <p><strong>Feedbacks: </strong><ul>{this.state.feedbacks.map( (item, i) => <li>{item}</li>)}</ul></p>
+                                    <p><strong>Feedbacks: </strong><ol>{this.state.feedbacks.map( (item, i) => <li>{item}</li>)}</ol></p>
                                     <button onClick={this.signOut} className="btn btn-info">Выйти</button>
                                 </div>
                                 <div className="col-xs-12 col-sm-4 text-center">

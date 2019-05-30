@@ -60,13 +60,15 @@ class Callback extends Component{
 
     render() {
         return (
-            <div className="col-sm-6 col-sm-offset-3">
-                {!this.state.isFormFilled ? <Form handleName={this.handleName} handleEmail={this.handleEmail}
-                                                  handleText={this.handleText}
-                                                  onSubmit={this.onSubmit} />
-                                                  :
-                    <AccessForm/>
-                }
+            <div className="container">
+                <div className="col-sm-6 col-sm-offset-3">
+                    {!this.state.isFormFilled ? <Form handleName={this.handleName} handleEmail={this.handleEmail}
+                                                      handleText={this.handleText}
+                                                      onSubmit={this.onSubmit} />
+                                                      :
+                        <AccessForm/>
+                    }
+                </div>
             </div>
         );
     }

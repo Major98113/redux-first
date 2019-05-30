@@ -62,6 +62,30 @@ class User extends Component{
             });
     }
 
+    signUp(data){
+        axios.post('/signup',{
+            data : data
+        })
+            .then( (response) =>{
+                if(response.data.result =='success'){
+                    const data ={
+                        isGuest : false,
+                        username : response.data.username,
+                        email : response.data.email
+                    };
+                    this.setUser(data);
+
+                }
+                else {
+                    alert("Такой пользователь уже есть!!!");
+                }
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
+    }
+
+
     signOut(){
         axios.post("/signout",{})
             .then(
@@ -86,7 +110,7 @@ class User extends Component{
     render() {
         return(
           <div>
-              {this.state.isGuest ?  <Autorization signIn={this.signIn.bind(this)} />: <Profile name={this.state.name} email={this.state.email} signOut={this.signOut}/>}
+              {this.state.isGuest ?  <Autorization signIn={this.signIn.bind(this)}  signUp={this.signUp.bind(this)} />: <Profile name={this.state.name} email={this.state.email} signOut={this.signOut}/>}
           </div>
         );
     }

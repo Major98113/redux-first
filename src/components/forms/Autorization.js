@@ -42,7 +42,7 @@ class Autorization extends Component{
                                 </li>
                             </ul>
                             <div className="tab-content tabs">
-                                {this.state.isAutorizeForm ?  <SignIn signIn={this.props.signIn} />: <SignUp />}
+                                {this.state.isAutorizeForm ?  <SignIn signIn={this.props.signIn} />: <SignUp signUp={this.props.signUp} />}
                             </div>
                         </div>
                     </div>
