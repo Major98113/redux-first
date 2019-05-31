@@ -19,7 +19,6 @@ class Users extends Component{
             loading : true,
             users : []
         };
-        console.log(this.state);
         this.setUsers = this.setUsers.bind(this);
     }
 
@@ -41,7 +40,6 @@ class Users extends Component{
     }
 
     setUsers(users){
-        console.log(this.state);
         this.setState({
             users : users,
             loading : false

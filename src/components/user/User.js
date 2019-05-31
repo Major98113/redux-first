@@ -109,7 +109,6 @@ class User extends Component{
 
 
     render() {
-        console.log(this.state);
         return(
           <div>
               {this.state.isGuest ?  <Autorization signIn={this.signIn.bind(this)}  signUp={this.signUp.bind(this)} />: <Profile name={this.state.name} email={this.state.email} signOut={this.signOut}/>}

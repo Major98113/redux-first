@@ -2,10 +2,9 @@ import React, {Component} from 'react';
 import "./styles/signup.css";
 
 const skills = [
-    "React",
-    "JS",
-    "ES6",
-    "Vue.js"
+    "Manicure",
+    "Pedicure",
+    "Massage"
 ];
 
 function find(array, value) {

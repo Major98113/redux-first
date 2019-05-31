@@ -1,5 +1,6 @@
 import React, {Component} from "react";
 import axios from 'axios';
+import { connect } from 'react-redux';
 import "./styles/callback.css";
 
 
@@ -7,9 +8,11 @@ class Callback extends Component{
 
     constructor(props){
         super(props);
+
+
         this.state = {
-            username : "",
-            email : "",
+            username : this.props.profile.username,
+            email : this.props.profile.email,
             text : "",
             isFormFilled : false
         };
@@ -59,12 +62,16 @@ class Callback extends Component{
 
 
     render() {
+
         return (
             <div className="container">
                 <div className="col-sm-6 col-sm-offset-3">
-                    {!this.state.isFormFilled ? <Form handleName={this.handleName} handleEmail={this.handleEmail}
+                    {!this.state.isFormFilled ? <Form handleName={this.handleName}
+                                                      handleEmail={this.handleEmail}
                                                       handleText={this.handleText}
-                                                      onSubmit={this.onSubmit} />
+                                                      username={this.state.username}
+                                                      email={this.state.email}
+                                                      onSubmit={this.onSubmit}/>
                                                       :
                         <AccessForm/>
                     }
@@ -101,6 +108,7 @@ class Form extends Component {
                                 id="name"
                                 placeholder="Enter name"
                                 required
+                                value={this.props.username ? this.props.username  : ""}
                             />
                             <div className="help-block with-errors"></div>
                         </div>
@@ -112,7 +120,9 @@ class Form extends Component {
                                 className="form-control"
                                 id="email"
                                 placeholder="Enter email"
-                                required />
+                                required
+                                value={this.props.email ? this.props.email  : ""}
+                            />
                             <div className="help-block with-errors"></div>
                         </div>
                     </div>
@@ -151,4 +161,11 @@ const AccessForm = ()=> {
 };
 
 
-export default Callback;
+const mapStateToProps = function(state) {
+    return {
+        profile: state.user
+    }
+};
+
+
+export default connect(mapStateToProps)(Callback);
